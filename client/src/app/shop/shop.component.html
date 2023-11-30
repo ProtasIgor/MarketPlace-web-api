@@ -39,13 +39,12 @@
                     [pageNumber]="shopParams.pageNumber"
                 ></app-paging-header>
 
-                <form class="form-inline mt-2">
-                    <input class="form-control mr-2" style="width: 300px;" placeholder="Поиск" type="text">
-                    <button class="btn btn-outline-primary my-2 mr-2">Поиск</button>
-                    <button class="btn btn-outline-success my-2">Сброс</button>
+                <form class="form-inline mt-2" >
+                    <input class="form-control mr-2" #search style="width: 300px;" placeholder="Поиск" type="text">
+                    <button (click)="onSearch()" class="btn btn-outline-primary my-2 mr-2" >Поиск</button>
+                    <button (click)="onReset()" class="btn btn-outline-success my-2" >Сброс</button>
                 </form>
             </div>
-
             <div class="row">
                 <div class="col-4 mb-4" *ngFor="let item of products">
                     <app-product-item [product]='item'></app-product-item>
