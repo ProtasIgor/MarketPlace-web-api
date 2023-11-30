@@ -3,6 +3,7 @@ import { ShopService } from './shop.service';
 import { IProduct } from '../shared/models/product';
 import { IType } from '../shared/models/productType';
 import { IBrand } from '../shared/models/brand';
+import { ShopParams } from '../shared/models/shopParams';
 
 @Component({
   selector: 'app-shop',
@@ -13,6 +14,14 @@ export class ShopComponent implements OnInit {
   products: IProduct[];
   brands: IBrand[];
   types: IType[];
+  shopParams = new ShopParams();
+  totalCount: number;
+
+  sortOptions = [
+    { name: 'По Алфавиту', value: 'name' },
+    { name: 'Цена: по возрастанию', value: 'priceAsc' },
+    { name: 'Цена: по убыванию', value: 'priceDesc' }
+  ];
 
   constructor(private shopService: ShopService) { }
 
@@ -23,8 +32,12 @@ export class ShopComponent implements OnInit {
   }
 
   getProducts() {
-    this.shopService.getProducts().subscribe(response => {
+    this.shopService.getProducts(this.shopParams).subscribe(response => {
       this.products = response.data;
+      this.shopParams.pageNumber = response.pageIndex;
+      this.shopParams.pageSize = response.pageSize;
+      this.totalCount = response.count;
+
     }, error => {
       console.log(error);
     })
@@ -32,7 +45,7 @@ export class ShopComponent implements OnInit {
 
   getBrands() {
     this.shopService.getBrands().subscribe(response => {
-      this.brands = response;
+      this.brands = [{ id: 0, name: 'All' }, ...response];
     }, error => {
       console.log(error);
     })
@@ -40,9 +53,29 @@ export class ShopComponent implements OnInit {
 
   getTypes() {
     this.shopService.getTypes().subscribe(response => {
-      this.types = response;
+      this.types = [{ id: 0, name: 'All' }, ...response];
     }, error => {
       console.log(error);
     })
+  }
+
+  onBrandSelected(brandId: number) {
+    this.shopParams.brandId = brandId;
+    this.getProducts();
+  }
+
+  onTypeSelected(typeId: number) {
+    this.shopParams.typeId = typeId;
+    this.getProducts();
+  }
+
+  onSortSelected(sort: string) {
+    this.shopParams.sort = sort;
+    this.getProducts();
+  }
+
+  onPageChanged(event: any) {
+    this.shopParams.pageNumber = event;
+    this.getProducts();
   }
 }
