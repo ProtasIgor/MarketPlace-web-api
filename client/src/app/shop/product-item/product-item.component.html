@@ -8,7 +8,7 @@
         <span class="mb-2 mt-auto">{{product.price}} BYN</span>
 
         <div class="btn-group">
-            <button type="button" class="btn btn-outline-secondary fa fa-shopping-cart mr-2"></button>
+            <button (click)="addItemToBasket()" type="button" class="btn btn-outline-secondary fa fa-shopping-cart mr-2"></button>
             <button routerLink="/shop/{{product.id}}" routerLinkActive="router-link-active" type="button"
                 class="btn btn-outline-secondary">Перейти</button>
         </div>

@@ -1,0 +1,20 @@
+<div class="bg-light px-4 py-3 text-uppercase font-weight-bold">
+    Выбор товаров
+</div>
+<div class="p-4">
+    <p class="font-italic mb-4">Стоимость доставки будет добавлена в зависимости от выбора, сделанного при оформлении заказа.</p>
+    <ul class="list-unstyled mb-4" *ngIf="(basketTotal$ | async)">
+        <li class="d-flex justify-content-between py-3 border-bottom">
+            <strong class="text-muted">Итог заказа</strong>
+            <strong>{{(basketTotal$ | async).subtotal}} BYN</strong>
+        </li>
+        <li class="d-flex justify-content-between py-3 border-bottom">
+            <strong class="text-muted">Доставка</strong>
+            <strong>{{(basketTotal$ | async).shipping}} BYN</strong>
+        </li>
+        <li class="d-flex justify-content-between py-3 border-bottom">
+            <strong class="text-muted">Итоговая сумма</strong>
+            <strong>{{(basketTotal$ | async).total}} BYN</strong>
+        </li>
+    </ul>
+</div>

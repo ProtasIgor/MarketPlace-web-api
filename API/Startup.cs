@@ -47,6 +47,10 @@ namespace API
                     .GetConnectionString("Redis"), true);
                 return ConnectionMultiplexer.Connect(configuration);
             }); */
+            services.AddSingleton<IConnectionMultiplexer ,ConnectionMultiplexer>(c => {
+                var configuration = ConfigurationOptions.Parse(_configuration.GetConnectionString("Redis"), true);
+                return ConnectionMultiplexer.Connect(configuration);
+            });
 
             services.AddApplicationServices();
             services.AddSwaggerDocumentation();
