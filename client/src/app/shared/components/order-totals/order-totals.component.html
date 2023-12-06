@@ -5,7 +5,7 @@
     <p class="font-italic mb-4">Стоимость доставки будет добавлена в зависимости от выбора, сделанного при оформлении заказа.</p>
     <ul class="list-unstyled mb-4" *ngIf="(basketTotal$ | async)">
         <li class="d-flex justify-content-between py-3 border-bottom">
-            <strong class="text-muted">Итог заказа</strong>
+            <strong class="text-muted">Сумма товаров</strong>
             <strong>{{(basketTotal$ | async).subtotal}} BYN</strong>
         </li>
         <li class="d-flex justify-content-between py-3 border-bottom">

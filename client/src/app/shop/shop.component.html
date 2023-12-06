@@ -4,14 +4,14 @@
 
         <section class="col-3">
             <ng-container *ngIf="types && brands">
-                <strong class="text-warning ml-3">Brands</strong>
+                <strong class="text-warning ml-3">Сортировать</strong>
                 <select class="custom-select my-3" name="" id="" (change)="onSortSelected($event.target.value)">
                     <option *ngFor="let sort of sortOptions" [value]="sort.value">
                         {{sort.name}}
                     </option>
                 </select>
 
-                <strong class="text-warning ml-3">Brands</strong>
+                <strong class="text-warning ml-3">Бренд</strong>
                 <ul class="list-group my-3">
                     <li class="list-group-item" *ngFor="let brand of brands"
                         [class.active]="brand.id === this.shopParams.brandId" [value]="brand.id"
@@ -20,7 +20,7 @@
                     </li>
                 </ul>
 
-                <strong class="text-warning ml-3">Types</strong>
+                <strong class="text-warning ml-3">Тип</strong>
                 <ul class="list-group my-3">
                     <li class="list-group-item" *ngFor="let type of types"
                         [class.active]="type.id === this.shopParams.typeId" [value]="type.id"

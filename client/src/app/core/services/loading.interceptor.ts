@@ -6,7 +6,7 @@ import { delay, finalize } from 'rxjs/operators';
 
 @Injectable()
 export class LoadingInterceptor implements HttpInterceptor {
-    constructor(private busyService: BusyService) {}
+    constructor(private busyService: BusyService) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (req.method === 'POST' && req.url.includes('orders')) {
@@ -20,7 +20,8 @@ export class LoadingInterceptor implements HttpInterceptor {
         }
         this.busyService.busy();
         return next.handle(req).pipe(
-            delay(1000),
+            //delay(1000),
+            delay(400),
             finalize(() => {
                 this.busyService.idle();
             })
